@@ -1,0 +1,29 @@
+{
+  "name": "node-wcm-dataexchange",
+  "version": "0.2.8",
+  "main": "app.js",
+  "dependencies": {
+    "jconfig": "",
+    "log4js": "",
+    "jsdom": "",
+    "jquery": "",
+    "dateformat": "",
+    "xmldom": "",
+    "form-data": ""
+  },
+  "scripts": {
+    "test": "node ./test/test.js",
+    "start": "node app"
+  },
+  "keywords": [
+    "wcm"
+  ],
+  "author": "giphoo",
+  "license": "ISC",
+  "_shasum": "b98f1fe887ab382a6b934815c12f9dd1a26bb7a6",
+  "_from": "node-wcm-dataexchange@",
+  "directories": {
+    "test": "test"
+  },
+  "devDependencies": {}
+}
