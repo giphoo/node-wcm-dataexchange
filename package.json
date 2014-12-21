@@ -1,6 +1,6 @@
 {
   "name": "node-wcm-dataexchange",
-  "version": "0.2.8",
+  "version": "0.2.18",
   "main": "app.js",
   "dependencies": {
     "jconfig": "",

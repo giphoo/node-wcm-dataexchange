@@ -84,7 +84,7 @@ WCM.prototype.connect = function(_func){
 WCM.prototype.login = function(_func){
     var _wcm = this._config.wcm;
     var _URL = _wcm.URL;
-    var _expSession = _wcm.login.expSession;
+    //var _expSession = _wcm.login.expSession;
 
     var _this = this;
 
@@ -108,18 +108,12 @@ WCM.prototype.login = function(_func){
         var cookie = res.headers["set-cookie"];
 
         if (cookie) {
-            cookie = cookie.join("||").match(_expSession);
-            if (cookie != null) {
-                _wcm.session = cookie[0];
+            _wcm.session = cookie;
 
-                logger.info("Get session[%s]: %s", JSON.stringify(parSession), _wcm.session);
-            }else{
-                logger.error("Get session error[%s]: %s", JSON.stringify(parSession), ERROR.NO_COOKIE);
-                return _func(false, ERROR.NO_COOKIE);
-            }
+            logger.info("Get session[%s]: %s", JSON.stringify(parSession), _wcm.session);
         }else{
-            logger.error("Get session error[%s]: %s", JSON.stringify(parSession), ERROR.NO_SESSION);
-            return _func(false, ERROR.NO_SESSION);
+            logger.error("Get session error[%s]: %s", JSON.stringify(parSession), ERROR.NO_COOKIE);
+            return _func(false, ERROR.NO_COOKIE);
         }
 
         _this.login_dowith(_func);
@@ -159,14 +153,9 @@ WCM.prototype.login_dowith = function(_func){
         }
 
         var headersSetCookie = res.headers["set-cookie"];
-        var cookie;
         if (headersSetCookie){
-            cookie = headersSetCookie.join("||").match(_wcm.login_dowith.expSession);
-
-            if (cookie){
-                logger.debug("Catch another session of WCM[Set-Cookie=%s], it will be Change to it...", cookie[0]);
-                _wcm.session = cookie[0];
-            }
+            logger.debug("Catch another session of WCM[Set-Cookie=%s], it will be Change to it...", cookie[0]);
+            _wcm.session = headersSetCookie;
         }
 
         _this.check(function(isLogin){

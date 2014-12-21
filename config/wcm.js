@@ -5,13 +5,11 @@ module.exports = {
             UserName: "admin",
             PassWord: "trsadmin"
         },
-        expSession : /JSESSIONID=[A-Z0-9]*/,
         path : "./app/login.jsp",
         time : 3000//重连的间隔时间
     },
     login_dowith : {
-        path : "./app/login_dowith.jsp",
-        expSession : /JSESSIONID=[A-Z0-9]*/
+        path : "./app/login_dowith.jsp"
     },
     check : {
         path : "./app/main/refresh.jsp",//检查登陆的地址

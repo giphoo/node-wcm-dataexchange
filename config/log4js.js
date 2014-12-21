@@ -3,7 +3,7 @@ module.exports = {
         {type : "console"}
     ],
     "levels" : {
-        WCM : "DEBUG",
+        WCM : "ERROR",
         DataExchange : "ERROR"
     }
 };
