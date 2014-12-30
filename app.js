@@ -14,6 +14,9 @@ if (!global.log4js){
 }
 var logger = log4js.getLogger("WCM");
 
+log4js.getLogger("WCM").setLevel("WARN");
+log4js.getLogger("DataExchange").setLevel("WARN");
+
 function WCM(_opt){
     this._init(_opt);
 }
@@ -128,16 +131,16 @@ WCM.prototype.login_dowith = function(_func){
     var _this = this;
 
     var par = url.format({
-        pathname : _wcm.login_dowith.path,
-        query: _wcm.login.user
+        pathname : _wcm.login_dowith.path
     });
 
     var parLogin = {
         hostname : _URL.hostname,
-        method : "GET",
+        method : "POST",
         port : _URL.port,
         path : url.resolve(_URL.path, par),
         headers : {
+            "Content-Type": "application/x-www-form-urlencoded",
             Cookie : _wcm.session
         }
     };
@@ -154,7 +157,7 @@ WCM.prototype.login_dowith = function(_func){
 
         var headersSetCookie = res.headers["set-cookie"];
         if (headersSetCookie){
-            logger.debug("Catch another session of WCM[Set-Cookie=%s], it will be Change to it...", cookie[0]);
+            logger.debug("Catch another session of WCM[Set-Cookie=%s], it will be Change to it...", headersSetCookie);
             _wcm.session = headersSetCookie;
         }
 
@@ -170,7 +173,11 @@ WCM.prototype.login_dowith = function(_func){
 
     });
 
-    reqLogin.end();
+    var post = url.format({
+        query: _wcm.login.user
+    }).replace(/^\?/, "");
+    logger.debug("Login send:", post);
+    reqLogin.end(post);
 };
 WCM.prototype.keepCheck = function(isLogin){
     var _wcm = this._config.wcm;

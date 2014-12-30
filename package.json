@@ -1,19 +1,19 @@
 {
   "name": "node-wcm-dataexchange",
-  "version": "0.2.18",
+  "version": "0.2.23",
   "main": "app.js",
   "dependencies": {
     "jconfig": "",
     "log4js": "",
-    "jsdom": "",
     "jquery": "",
     "dateformat": "",
     "xmldom": "",
-    "form-data": ""
+    "npm": ""
   },
   "scripts": {
     "test": "node ./test/test.js",
-    "start": "node app"
+    "start": "node app",
+    "install": "node ./init.js"
   },
   "keywords": [
     "wcm"
